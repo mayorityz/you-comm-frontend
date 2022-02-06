@@ -3,9 +3,7 @@ import LocalDB from './LocalStorage'
 
 export default class HttpServices {
   constructor(path) {
-    this.path = 'http://localhost:3300/api/v1' + path
-    // this.path = 'https://my-yoruba-comm.herokuapp.com/api/v1' + path
-    // https://my-yoruba-comm.herokuapp.com/
+    this.path = `${process.env.REACT_APP_NODEBACKEND}` + path
   }
 
   async post(_data) {
