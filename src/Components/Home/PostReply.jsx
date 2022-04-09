@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import LocalDB from './../../Utils/LocalStorage'
 import HttpServices from './../../Utils/HttpServices'
+import * as timeago from 'timeago.js'
 
 const PostReply = ({ reply }) => {
   const [response, setResponse] = useState('')
@@ -20,7 +21,7 @@ const PostReply = ({ reply }) => {
   return (
     <div className="post_replies">
       <h4>
-        {reply.user} - {reply.replyDate}.
+        {reply.user} - {timeago.format(reply.replyDate)}.
       </h4>
 
       <p>{reply.reply}</p>

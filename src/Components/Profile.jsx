@@ -6,6 +6,7 @@ import HttpServices from '../Utils/HttpServices'
 import aboutmeImg from '../Components/images/aboutme.png'
 import Discussion from './Discussion'
 import PageLoader from './MiniComponents/PageLoader'
+import * as timeago from 'timeago.js'
 
 export default function Profile() {
   const { username } = useParams()
@@ -55,10 +56,9 @@ export default function Profile() {
                 <div>
                   <UserPlus size={50} />
                 </div>
-                <Link>Update Profile</Link>
               </div>
               <h2 style={{ textTransform: 'capitalize' }}>{user.username}.</h2>
-              <h6>Joined : {user.date_joined}</h6>
+              <h6>Joined : {timeago.format(user.date_joined)}</h6>
               {/* <h6>Total Posts : 40</h6>
                 <h6>Total Replies : 40</h6> */}
               <hr />

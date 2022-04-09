@@ -40,8 +40,8 @@ const CreatePost = () => {
     setSaving('Saving Your Post ...')
     let req = new HttpServices(Endpoints.CREATE_NEW_POST)
     let res = await req.post({ title, content, category: selectCat })
-    if (res.status) setSaving('You are not logged in!')
-    else setSaving('New Post Created Successfully')
+    if (res.status) setSaving('New Post Created Successfully')
+    else setSaving('You are not logged in!')
   }
   return (
     <>

@@ -7,6 +7,7 @@ import HttpServices from './../../Utils/HttpServices'
 import aboutmeImg from './../../Components/images/aboutme.png'
 import Discussion from '../Discussion'
 import PageLoader from '../MiniComponents/PageLoader'
+import * as timeago from 'timeago.js'
 
 const MyAccount = () => {
   const [userPosts, setUserPosts] = useState([])
@@ -66,13 +67,13 @@ const MyAccount = () => {
                   </>
                 )}
               </div>
-              <h2>{user.username}.</h2>
-              <h6>Joined : {user.date_joined}</h6>
-              <h6>
+              <h2 className="text-capitalize">{user.username}.</h2>
+              <p>Joined : {timeago.format(user.date_joined)}</p>
+              <p className="pt-2">
                 <User /> Following : {user.following.length}
-              </h6>
-              <a href="/update-profile" className="btn btn-success btn-lg mt-5">
-                <Edit2 /> Update Profile
+              </p>
+              <a href="/update-profile" className="btn btn-success btn-sm mt-5">
+                <Edit2 size={12} /> Update Profile
               </a>
               {/* 
               Todo

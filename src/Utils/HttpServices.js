@@ -13,7 +13,7 @@ export default class HttpServices {
         this.path,
         { ..._data },
         {
-          withCredentials: true,
+          // withCredentials: true,
           headers: {
             auth: token ? token.one : null,
           },
@@ -39,7 +39,7 @@ export default class HttpServices {
     let token = JSON.parse(LocalDB.retrieve('x-yu-tox'))
     try {
       const { data } = await axios.get(this.path, {
-        withCredentials: true,
+        // withCredentials: true,
         headers: {
           auth: token ? token.one : null,
         },

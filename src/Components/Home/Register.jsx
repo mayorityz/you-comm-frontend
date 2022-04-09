@@ -3,8 +3,6 @@ import { Key, Mail, User } from 'react-feather'
 import './Styles/Login.css'
 import { Link } from 'react-router-dom'
 import HttpServices from './../../Utils/HttpServices'
-import emailjs from 'emailjs-com'
-emailjs.init('user_hDRqbIr7jiCYaY0MRuHiZ')
 
 const Register = () => {
   const [loading, isLoading] = useState('')
@@ -27,14 +25,6 @@ const Register = () => {
         </div>,
       )
     } else {
-      let templateParams = {
-        to_name: username,
-        link: `https://sulsugbest.com/verify-account/${response.code}`,
-        to_email: email,
-        from_title: 'Yoruba Community',
-      }
-
-      await emailjs.send('service_bk99p7k', 'template_0mnax1b', templateParams)
       isLoading(
         <div className="alert alert-success text-center">
           Account Created! Check Your Email To Verify!!

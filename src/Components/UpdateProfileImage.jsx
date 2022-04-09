@@ -21,7 +21,7 @@ export default function UpdateProfileImage() {
     e.preventDefault()
     setNotification('Updating Profile Image!')
 
-    if (!_image) {
+    if (!file) {
       setNotification('No Image Selected!')
       return
     }
@@ -57,6 +57,7 @@ export default function UpdateProfileImage() {
       console.log(reader.error)
     }
   }
+
   return (
     <div className="wrapper">
       <div className="container">
@@ -119,7 +120,8 @@ export default function UpdateProfileImage() {
                     {notification}
                   </div>
                 )}
-                <button className="btn btn-lg btn-success">
+                <hr />
+                <button className="btn btn-sm btn-success">
                   Submit New Image
                 </button>
               </form>

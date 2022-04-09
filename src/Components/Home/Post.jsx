@@ -9,11 +9,13 @@ import PostReply from './PostReply'
 import LocalDB from './../../Utils/LocalStorage'
 import { Endpoints } from '../../Utils/Constant.js'
 import PageLoader from '../MiniComponents/PageLoader'
+import * as timeago from 'timeago.js'
 
 const Post = () => {
   const { slug } = useParams()
   const [loading, setLoading] = useState(true)
   const [post, setPost] = useState({})
+  const [takenAction, setTakenAction] = useState(false)
 
   const [reply, setReply] = useState('')
   const [replyMsg, setReplyMsg] = useState('')
@@ -59,16 +61,20 @@ const Post = () => {
   }
 
   const postAction = async (action, post_) => {
+    if (takenAction) return
+
     console.log(action, post_)
     // -> check that the person hasn't taken any action...
     let User = JSON.parse(LocalDB.retrieve('x-yu-tox'))
-    let isExists = post.actions.find((user) => user.username === User.two)
-    if (isExists === undefined) return
+
+    let hasTakenAction = post.actions.find((user) => user.username === User.two)
+
+    if (!hasTakenAction === undefined || hasTakenAction) return
     else {
       let req = new HttpServices(Endpoints.POST_ACTION)
       let res = await req.post({ action, post: post_ })
-      console.log(res)
     }
+    setTakenAction(true)
   }
 
   if (loading) return <PageLoader />
@@ -86,7 +92,7 @@ const Post = () => {
             <h4>{post.title}</h4>
             <div className="post_user_details">
               <span>Posted By {post.postedBy}.</span> <Calendar size={12} />{' '}
-              {post.postDate}
+              {timeago.format(post.postDate)}
               <div
                 style={{ position: 'absolute', top: 0, right: 0, margin: 20 }}
               >
@@ -97,10 +103,10 @@ const Post = () => {
             <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
             <div className="interactions">
               <div onClick={() => postAction('like', post.postSlug)}>
-                <ThumbsUp size={13} /> {totalLikes}
+                <ThumbsUp size={13} color="green" /> {totalLikes}
               </div>
               <div onClick={() => postAction('dislike', post.postSlug)}>
-                <ThumbsDown size={13} /> {post.dislikes.length}
+                <ThumbsDown size={13} color="red" /> {post.dislikes.length}
               </div>
               <div>
                 <MessageCircle size={13} /> {post.replies.length}

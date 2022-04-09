@@ -9,13 +9,19 @@ const Discussions = () => {
   const [discussion, setDiscussions] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    ;(async () => {
+  let fetch = async () => {
+    try {
       let posts = new HttpServices('/posts/get-all-posts')
       let _posts = await posts.post({})
       setDiscussions(_posts)
       setLoading(false)
-    })()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    fetch()
   }, [])
 
   if (loading) {

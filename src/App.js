@@ -52,7 +52,7 @@ function App() {
       <Route path="/login">
         <Wrapper component={Login} />
       </Route>
-      <Route path="/verify-account/:code">
+      <Route path="/verify-account/:user/:code">
         <Wrapper component={Verification} />
       </Route>
       <Route path="/:slug">

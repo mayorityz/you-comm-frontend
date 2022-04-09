@@ -8,13 +8,13 @@ import { CheckCircle, XCircle } from 'react-feather'
 import image_ from '../Components/images/error.png'
 
 export default function Verification() {
-  const { code } = useParams()
+  const { code, user } = useParams()
   const [response, setResponse] = useState('')
   const [status, setStatus] = useState('')
   const [verifying, setVerification] = useState(true)
 
   const call = async () => {
-    let request = new HttpServices(`${Endpoints.VERIFICATION}/${code}`)
+    let request = new HttpServices(`${Endpoints.VERIFICATION}/${user}/${code}`)
     let res = await request.get()
     setResponse(res.message)
     setStatus(res.status)
